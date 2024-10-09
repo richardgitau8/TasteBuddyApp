@@ -1,0 +1,31 @@
+/* Drinks.css */
+.drink-card {
+  transition: transform 0.3s ease;
+}
+
+.drink-card:hover {
+  animation: pulse 0.6s; /* Removed 'infinite' to pulse only once */
+}
+
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.05);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.slick-prev,
+.slick-next {
+  font-size: 24px; /* Adjust size as necessary */
+  color: #4a4a4a; /* Arrow color */
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+  color: #2c7a4d; /* Change color on hover */
+}
