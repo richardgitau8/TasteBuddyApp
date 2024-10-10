@@ -17,7 +17,8 @@ import Blogs from './components/Blogs';
 import Drinks from './components/Drinks';
 import DrinkDetail from './components/DrinkDetail';
 import Profile from './components/Profile'; 
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 const Main = () => {
   return (
