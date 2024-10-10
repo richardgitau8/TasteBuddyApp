@@ -1,13 +1,9 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      // Resolve issues with Font Awesome imports
-      '@fortawesome/fontawesome-free': require.resolve('@fortawesome/fontawesome-free')
-    },
-  },
   optimizeDeps: {
     include: ['@fortawesome/fontawesome-free/css/all.min.css'],
   },
@@ -16,4 +12,4 @@ export default defineConfig({
       external: ['@fortawesome/fontawesome-free'],
     },
   },
-})
+});
