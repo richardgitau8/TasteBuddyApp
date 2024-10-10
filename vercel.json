@@ -1,15 +1,14 @@
 {
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
-    ],
     "rewrites": [
       {
         "source": "/(.*)",
         "destination": "/"
       }
-    ]
+    ],
+    "functions": {
+      "api/users/**/*.js": {
+        "maxDuration": 30
+      }
+    }
   }
   
