@@ -1,40 +1,51 @@
 import React, { useState } from 'react';
-import food1 from '../assets/hero5.jpg'; 
+import food1 from '../assets/hero5.jpg';
 import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../firebase'; // Import Firebase auth
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-   
-    console.log({ name, email, password });
 
-    // Simulate successful sign-up and store user data locally
-    localStorage.setItem('user', JSON.stringify({ name, email }));
+    try {
+      // Create user with email and password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
-    // Redirect to homepage
-    navigate('/');
+      // Send verification email
+      await sendEmailVerification(user);
+      console.log('Verification email sent to:', email);
+
+      // Store the user in localStorage (optional)
+      localStorage.setItem('user', JSON.stringify({ name, email }));
+
+      // Redirect to a 'Please Verify' page
+      navigate('/verify-email');
+    } catch (err) {
+      setError('Registration failed. Please try again.');
+      console.error('Registration error:', err);
+    }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-[#D9D9D9]"> {/* Background color */}
+    <div className="flex items-center justify-center h-screen bg-[#D9D9D9]">
       <div className="flex bg-white shadow-lg rounded-lg overflow-hidden w-full max-w-3xl">
-        {/* Image Section */}
         <div className="hidden md:block md:w-1/2">
           <img src={food1} alt="Delicious Food" className="w-full h-full object-cover" />
         </div>
-
-        {/* Form Section */}
         <div className="w-full md:w-1/2 p-8">
-          <h2 className="text-2xl font-bold text-center mb-6 text-[#F23A29]">Create an Account</h2> {/* Header color */}
+          <h2 className="text-2xl font-bold text-center mb-6 text-[#F23A29]">Create an Account</h2>
+          {error && <p className="text-red-500 text-center">{error}</p>}
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-black" htmlFor="name">Full Name</label> {/* Label color */}
+              <label className="block text-sm font-medium text-black" htmlFor="name">Full Name</label>
               <input
                 type="text"
                 id="name"
@@ -45,7 +56,6 @@ const RegistrationForm = () => {
                 required
               />
             </div>
-
             <div className="mb-4">
               <label className="block text-sm font-medium text-black" htmlFor="email">Email Address</label>
               <input
@@ -58,7 +68,6 @@ const RegistrationForm = () => {
                 required
               />
             </div>
-
             <div className="mb-4">
               <label className="block text-sm font-medium text-black" htmlFor="password">Password</label>
               <input
@@ -71,7 +80,6 @@ const RegistrationForm = () => {
                 required
               />
             </div>
-
             <button
               type="submit"
               className="w-full bg-[#F23A29] text-white font-bold py-2 rounded-md hover:bg-[#e02e22] transition duration-200"
@@ -79,10 +87,9 @@ const RegistrationForm = () => {
               Sign Up
             </button>
           </form>
-
-          <p className="mt-4 text-center text-black"> 
+          <p className="mt-4 text-center text-black">
             Already have an account?{' '}
-            <Link to="/signin" className="text-[#F23A29] hover:text-[#e02e22] font-medium"> 
+            <Link to="/signin" className="text-[#F23A29] hover:text-[#e02e22] font-medium">
               Sign In
             </Link>
           </p>

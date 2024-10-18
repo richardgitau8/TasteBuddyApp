@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate for back navigation
+import { useParams, useNavigate } from 'react-router-dom'; 
 import axios from 'axios';
 
 const RecipeDetail = () => {
   const { id } = useParams();  // Extract the id from the route
   const [recipe, setRecipe] = useState(null);
   const [error, setError] = useState('');
-  const navigate = useNavigate(); // Initialize navigate hook for back navigation
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -34,7 +34,7 @@ const RecipeDetail = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 py-8"> {/* Added padding here */}
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 py-8"> 
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-3xl mx-auto text-center">
         {/* Back Navigation Arrow */}
         <div className="flex justify-start mb-4">

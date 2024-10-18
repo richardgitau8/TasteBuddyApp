@@ -12,9 +12,9 @@ const HomePage = () => {
   const [trendingRecipes, setTrendingRecipes] = useState([]);
   const [loadingRecipes, setLoadingRecipes] = useState(true);
   const [, setLoadingDrinks] = useState(true);
-  const [loadingTrendingRecipes, setLoadingTrendingRecipes] = useState(true);
+  const [, setLoadingTrendingRecipes] = useState(true);
   const [recipeError, setRecipeError] = useState('');
-  const [drinkError, setDrinkError] = useState('');
+  const [, setDrinkError] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [loadingSearch, setLoadingSearch] = useState(false);
   const [searchError, setSearchError] = useState('');

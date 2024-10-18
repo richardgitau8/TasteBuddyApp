@@ -20,7 +20,7 @@ const App = () => {
       if (data.meals) {
         setRecipes(data.meals);
       } else {
-        setRecipes([]); // No recipes found
+        setRecipes([]); // kama hakuna recipe
         setError('No recipes found.');
       }
     } catch (error) {

@@ -3,7 +3,7 @@ import axios from 'axios';
 const BASE_MEAL_URL = 'https://www.themealdb.com/api/json/v1/1/';
 const BASE_DRINK_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
-// Function to fetch both food and drink recipes by search term
+
 export const fetchRecipes = async (searchTerm = '') => {
   try {
     // Fetch food recipes
