@@ -9,7 +9,10 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      external: ['@fortawesome/fontawesome-free'],
+      external: [
+        '@fortawesome/fontawesome-free',
+        'react-icons/fa', 
+      ],
     },
   },
 });
