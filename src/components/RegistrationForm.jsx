@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import food1 from '../assets/hero5.jpg'; 
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,36 +14,35 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');   // Clear any previous errors
-    setMessage(''); // Clear any previous success messages
+    setError('');   
+    setMessage(''); 
   
     try {
       // Create user account with email and password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-  
+
+      // Store user's display name (optional)
+      await user.updateProfile({ displayName: name });
+
       // Send verification email
       await sendEmailVerification(user);
       setMessage('A verification email has been sent to your email address. Please verify to continue.');
-  
-      // Store user's display name (optional)
-      await user.updateProfile({ displayName: name });
-  
+
       // Clear form inputs after successful registration
       setName('');
       setEmail('');
       setPassword('');
-  
-      // Redirect or navigate if needed after setting message
-      // navigate('/verify-email');  // Only do this after sending the verification email if needed
-  
+
+      // Optionally redirect after sending the verification email
+      // navigate('/verify-email');  // Uncomment if you want to navigate
+
     } catch (error) {
-      // Set the error message only when there's an actual error
-      setError('Registration failed. Please try again.');
+      // Set the error message from Firebase
+      setError(error.message || 'Registration failed. Please try again.');
       console.error('Registration error:', error);
     }
   };
-  
 
   return (
     <div className="flex items-center justify-center h-screen bg-[#D9D9D9]">

@@ -1,4 +1,4 @@
-
+// src/main.jsx
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -9,7 +9,7 @@ import RegistrationForm from "./components/RegistrationForm";
 import SignInForm from "./components/SignInForm";
 import RecipeDetail from "./components/RecipeDetail";
 
-import "./index.css";
+import "./index.css";  // Make sure your styles are imported here
 import FavoritesList from "./components/FavoritesList";
 import ContactUs from "./components/ContactUs";
 import TrendingRecipes from "./components/TrendingRecipes";
@@ -22,22 +22,25 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 const Main = () => {
   return (
     <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/signup" element={<RegistrationForm />} />
-        <Route path="/signin" element={<SignInForm />} />
-        <Route path="/recipes/:id" element={<RecipeDetail />} />
-        <Route path="/favorites" element={<FavoritesList />} />
-
-        <Route path="/contact" element={<ContactUs />} />
-        <Route path="/trending-recipes" element={<TrendingRecipes />} />
-        <Route path="/blogs" element={<Blogs />} />
-        <Route path="/drinks" element={<Drinks />} />
-        <Route path="/drinks/:id" element={<DrinkDetail />} />
-        <Route path="/profile" element={<Profile />} />
-      </Routes>
-      <Footer />
+      <div className="app-container">  {/* Optional: Add a container for styling */}
+        <Header />
+        <Routes>
+          {/* Main app route */}
+          <Route path="/" element={<App />} />
+          {/* Other routes */}
+          <Route path="/signup" element={<RegistrationForm />} />
+          <Route path="/signin" element={<SignInForm />} />
+          <Route path="/recipes/:id" element={<RecipeDetail />} />
+          <Route path="/favorites" element={<FavoritesList />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/trending-recipes" element={<TrendingRecipes />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/drinks" element={<Drinks />} />
+          <Route path="/drinks/:id" element={<DrinkDetail />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+        <Footer />
+      </div>
     </Router>
   );
 };

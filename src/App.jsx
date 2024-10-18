@@ -20,7 +20,7 @@ const App = () => {
       if (data.meals) {
         setRecipes(data.meals);
       } else {
-        setRecipes([]); // kama hakuna recipe
+        setRecipes([]); // No recipes found
         setError('No recipes found.');
       }
     } catch (error) {
@@ -33,15 +33,15 @@ const App = () => {
   return (
     <div>
       <Routes>
-        {/* HomePage component for landing */}
-        <Route path="/" element={<HomePage 
+        {/* Main route for HomePage */}
+        <Route path="*" element={<HomePage 
           onSearch={handleSearch} // Pass handleSearch function
           recipes={recipes} // Pass recipes to HomePage
           loading={loading} // Pass loading state
           error={error} // Pass error state
         />} />
         
-        {/* RecipeList for other routes */}
+        {/* Other routes for RecipeList */}
         <Route path="/recipes" element={<RecipeList recipes={recipes} error={error} />} />
       </Routes>
     </div>

@@ -13,32 +13,45 @@ const SignInForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Clear any previous errors
+
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Check email verification status
       if (user.emailVerified) {
         navigate('/'); // Redirect to homepage on successful sign-in
       } else {
         setError('Please verify your email before signing in.');
       }
     } catch (err) {
-      setError('Invalid email or password. Please try again.');
+      // Show specific Firebase error message
+      setError(err.message || 'Invalid email or password. Please try again.');
       console.error('Sign-in error:', err);
     }
   };
 
   // Handle Google sign-in
   const handleGoogleSignIn = async () => {
+    setError(''); // Clear any previous errors
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      if (result.user.emailVerified) {
+      const user = result.user;
+
+      // Check email verification status
+      if (user.emailVerified) {
         navigate('/');
       } else {
         setError('Please verify your email before signing in.');
       }
     } catch (err) {
-      setError('Google sign-in failed. Please try again.');
+      // Show specific Firebase error message
+      if (err.code === 'auth/popup-closed-by-user') {
+        setError('The sign-in popup was closed before completing the sign-in process. Please try again.');
+      } else {
+        setError(err.message || 'Google sign-in failed. Please try again.');
+      }
       console.error('Google sign-in error:', err);
     }
   };
