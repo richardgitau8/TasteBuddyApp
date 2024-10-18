@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import food1 from '../assets/hero5.jpg'; 
 import { Link, useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+// Commenting out Firebase imports
+// import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -10,7 +11,7 @@ const RegistrationForm = () => {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-  const auth = getAuth();
+  // const auth = getAuth(); // Comment out Firebase auth initialization
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,15 +19,15 @@ const RegistrationForm = () => {
     setMessage(''); 
   
     try {
-      // Create user account with email and password
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      // Disable user creation and email verification for testing
+      // const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      // const user = userCredential.user;
 
       // Store user's display name (optional)
-      await user.updateProfile({ displayName: name });
+      // await user.updateProfile({ displayName: name });
 
       // Send verification email
-      await sendEmailVerification(user);
+      // await sendEmailVerification(user);
       setMessage('A verification email has been sent to your email address. Please verify to continue.');
 
       // Clear form inputs after successful registration
