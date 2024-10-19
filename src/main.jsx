@@ -9,7 +9,7 @@ import RegistrationForm from "./components/RegistrationForm";
 import SignInForm from "./components/SignInForm";
 import RecipeDetail from "./components/RecipeDetail";
 
-import "./index.css";  // Make sure your styles are imported here
+import "./index.css";  
 import FavoritesList from "./components/FavoritesList";
 import ContactUs from "./components/ContactUs";
 import TrendingRecipes from "./components/TrendingRecipes";
@@ -27,7 +27,7 @@ const Main = () => {
         <Routes>
           {/* Main app route */}
           <Route path="/" element={<App />} />
-          {/* Other routes */}
+        
           <Route path="/signup" element={<RegistrationForm />} />
           <Route path="/signin" element={<SignInForm />} />
           <Route path="/recipes/:id" element={<RecipeDetail />} />

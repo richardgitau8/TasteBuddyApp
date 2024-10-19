@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import food1 from '../assets/hero5.jpg'; 
-import { Link, useNavigate } from 'react-router-dom';
-// Commenting out Firebase imports
-// import { getAuth, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 const RegistrationForm = () => {
   const [name, setName] = useState('');
@@ -10,8 +8,6 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
-  // const auth = getAuth(); // Comment out Firebase auth initialization
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,29 +15,20 @@ const RegistrationForm = () => {
     setMessage(''); 
   
     try {
-      // Disable user creation and email verification for testing
-      // const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      // const user = userCredential.user;
-
-      // Store user's display name (optional)
-      // await user.updateProfile({ displayName: name });
-
-      // Send verification email
-      // await sendEmailVerification(user);
-      setMessage('A verification email has been sent to your email address. Please verify to continue.');
-
-      // Clear form inputs after successful registration
-      setName('');
-      setEmail('');
-      setPassword('');
-
-      // Optionally redirect after sending the verification email
-      // navigate('/verify-email');  // Uncomment if you want to navigate
-
+      // Simulate user account creation
+      if (email && password && name) {
+        setMessage('Registration successful. Please sign in.');
+        
+        // Clear form inputs after successful registration
+        setName('');
+        setEmail('');
+        setPassword('');
+      } else {
+        throw new Error('Please fill in all the required fields.');
+      }
     } catch (error) {
-      // Set the error message from Firebase
+      // Set custom error message
       setError(error.message || 'Registration failed. Please try again.');
-      console.error('Registration error:', error);
     }
   };
 

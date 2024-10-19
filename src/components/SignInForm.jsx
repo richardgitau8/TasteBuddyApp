@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import food2 from '../assets/food2.png';
 import { Link, useNavigate } from 'react-router-dom';
-// Commenting out Firebase imports
-// import { auth, googleProvider } from '../firebase'; // Firebase setup
-// import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { FaGoogle } from 'react-icons/fa';
 
 const SignInForm = () => {
   const [email, setEmail] = useState('');
@@ -12,52 +8,15 @@ const SignInForm = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setError(''); // Clear any previous errors
 
-    // Disable sign-in logic for testing
-    try {
-      // const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      // const user = userCredential.user;
-
-      // Check email verification status
-      // if (user.emailVerified) {
-      //   navigate('/'); // Redirect to homepage on successful sign-in
-      // } else {
-      //   setError('Please verify your email before signing in.');
-      // }
-      setMessage('Sign-in simulated successfully.'); // Simulate success message
-    } catch (err) {
-      // Show specific Firebase error message
-      setError(err.message || 'Invalid email or password. Please try again.');
-      console.error('Sign-in error:', err);
-    }
-  };
-
-  // Handle Google sign-in (disabled for testing)
-  const handleGoogleSignIn = async () => {
-    setError(''); // Clear any previous errors
-    // Disable Google sign-in logic for testing
-    try {
-      // const result = await signInWithPopup(auth, googleProvider);
-      // const user = result.user;
-
-      // Check email verification status
-      // if (user.emailVerified) {
-      //   navigate('/');
-      // } else {
-      //   setError('Please verify your email before signing in.');
-      // }
-      setMessage('Google sign-in simulated successfully.'); // Simulate success message
-    } catch (err) {
-      // Show specific Firebase error message
-      if (err.code === 'auth/popup-closed-by-user') {
-        setError('The sign-in popup was closed before completing the sign-in process. Please try again.');
-      } else {
-        setError(err.message || 'Google sign-in failed. Please try again.');
-      }
-      console.error('Google sign-in error:', err);
+    
+    if (email === 'test@example.com' && password === 'password') {
+      navigate('/'); // Redirect to homepage on successful sign-in
+    } else {
+      setError('Invalid email or password. Please try again.');
     }
   };
 
@@ -104,15 +63,6 @@ const SignInForm = () => {
               Sign In
             </button>
           </form>
-
-          {/* Google Sign-In Button */}
-          <button
-            onClick={handleGoogleSignIn}
-            className="w-full flex items-center justify-center bg-red-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-red-600 transition duration-200"
-          >
-            <FaGoogle className="mr-2" />
-            Sign in with Google
-          </button>
 
           <p className="mt-4 text-center text-black">
             Don't have an account?{' '}
